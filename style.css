@@ -1,0 +1,116 @@
+/* 변수나 공통적으로 쓰이는 사이즈 등 이런 공통적으로 쓰일만한 애들은 변수로 정의해놓고 쓸 것 */
+:root{
+  /* color */
+  /* 여기서는 버튼 컬러나 배경 컬러, 폰트 컬러 지정할 때 쓰려고 정의한 것 같음. */
+  --color-black: #3f454d;
+  --color-white: #ffffff;
+  --color-blue: #3b88c3;
+  --color-yellow: #fbbe28;
+  --color-pink: #fd7f84;
+  --color-light-grey: #dfdfdf;
+
+  /* size */
+  --base-space: 8px; /* margin, padding을 넣는 경우에도 변수로 지정해서 일관되게 기본값을 사용할 수 있도록 */
+  --size-button: 60px;
+  --size-border: 4px;
+  --size-thumbnail: 50px;
+  --font-size: 18px;
+
+  /* animation */
+  --size-animation-duration: 300ms;
+}
+
+body{
+  height: 100vh; /* 높이 자체가 viewport(window창)의 100%가 되도록 지정 */
+  background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* align items는 flexbox에서 flex-direction의 cross axis 방향으로 item 정렬을 조정함 */
+  /* justify content는 flexbox에서 flex-direction 방향으로(즉, main axis 방향으로) item 정렬을 조정함 */
+}
+
+.logo {
+  cursor: pointer; /* 이것도 마우스 올려놓을 때 cursor모양이긴 하지만 그냥 .logo에 하는 거 같음 */
+  transition: transform var(--size-animation-duration) ease;
+  /* transition은 hover상태일 때가 아니라, .logo와 관련된 모든 변형에 대해서 적용하는 것이므로 .logo{}에다가 쓸 것  */
+}
+
+.btn{
+  background-color: transparent; /* 이렇게만 해놓으면 button의 border랑 outline이 너무 못생기게 나옴. */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: transform var(--size-animation-duration) ease;
+  margin-right: var(--base-space);
+}
+
+.btn:hover, /* 동일한 hover효과를 적용하고 싶으면 selector1:hover, selecter2:hover{} 요렇게 쓸 것! */
+.logo:hover{
+  transform: scale(1.1);
+}
+
+.buttons{
+  display: flex;
+  align-items: center; 
+}
+
+/* 이런식으로 변수가 필요한 부분이 생기면 또 :root{}로 올라가서 지정하고 와서 사용하기 */
+.imgBtn{
+  width: var(--size-button); /* 변수 사용하려면 그냥 'size' 요것만 검색해도 알아서 자동완성 뜨니까 처음부터 var쓰지 말 것 */
+  height: var(--size-button);
+}
+
+.colorBtn{
+  font-size: var(--font-size);
+  padding: calc(var(--base-space) * 2); /* calc() 는 값을 계산할 수 있는 함수. 미리 지정된 변수값에 *2 한 값으로 패딩을 주려고 한 것. */
+  border-radius: var(--size-border);
+}
+
+.blue {
+  background-color: var(--color-blue);
+}
+
+.yellow {
+  background-color: var(--color-yellow);
+}
+
+.pink {
+  background-color: var(--color-pink);
+}
+
+.items{
+  /* .items는 .item의 개수에 상관없이 일정한 크기로 있는 게 중요하기 때문에 width와 height값을 반응형으로 퍼센트값으로 고정해줄 것 */
+  /* 참고로 .items는 .item들을 감싸고 있는 하나의 큰 ul태그 영역이다.*/
+  /* %는 부모 요소에 대한 %값으로 상대적인 값이 결정됨 */
+  width: 60%;
+  height: 60%;
+  list-style: none;
+  padding-left: 0;
+  overflow-y: scroll;
+  /* 
+  item들이 여러개가 있다고 생각해봐. 그럼 걔내들의 목록을 스크롤하려면 전체 화면으로 스크롤해야 하잖아?
+  근데 우리는 이 .items라는 ul태그 영역 내에서만 스크롤하고 싶고, 전체화면은 가만히 있었으면 좋겠어.
+  이거를 위해서 쓰는 게 overflow-y: scroll; 인 거지. 
+  즉, 해당 요소(.items)의 컨텐츠들이 흘러넘칠 때(overflow) 이걸 어떻게 처리해 줄 것인지 지정해주는 게 overflow
+  */
+}
+
+.item{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: var(--base-space);
+  margin-bottom: var(--base-space);
+}
+
+.item__thumbnail{
+  width: var(--size-thumbnail);
+  height: var(--size-thumbnail);
+}
+
+.item__description{
+  margin-left: var(--base-space);
+  font-size: var(--font-size);
+}
